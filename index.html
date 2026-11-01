@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marina Huber — Yoga</title>
+<meta name="description" content="Yoga teacher in Pula, Croatia. Learning about asanas, attention and rest — open for individual yoga therapy classes, in person and online.">
+<meta name="author" content="Marina Huber">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%237a4bbf' stroke-width='8'/><circle cx='50' cy='50' r='12' fill='%237a4bbf'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Figtree:wght@300;400;500;600&display=swap">
+<style>
+  /* One long scroll, 7 chakra sections crown→root; background wash cross-fades on scroll.
+     Type: DM Serif Display (headlines, italic + upright accents), DM Serif Text (serif details), Figtree (body). */
+  :root {
+    --bg:#fbf9f6; --ink:#211c18; --muted:#7b736a; --rule:#e8e2d9;
+    --crown:#7a4bbf; --eye:#4a58b8; --throat:#3f7fb5; --heart:#4f9c6b;
+    --plexus:#c9a227; --sacral:#d07838; --root:#b84a3f;
+    --display:"DM Serif Display", Georgia, serif;
+    --text:"DM Serif Text", Georgia, serif;
+    --body:"Figtree", system-ui, sans-serif;
+  }
+  html { scroll-behavior:smooth; height:100%; overflow-x:clip; overscroll-behavior-y:none }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--body); font-weight:300;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+  img { max-width:100% }
+  .wash { position:fixed; inset:0; background:#efe9f7; transition:background .6s linear; z-index:-1 }
+  main { max-width:960px; margin:0 auto; position:relative }
+  section { position:relative; z-index:1; min-height:70vh; display:flex; flex-direction:column; justify-content:center; gap:22px; padding-block:96px; }
+  .thread { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0 }
+  .thread text { font-family:var(--text); font-style:italic; font-size:44px; letter-spacing:.26em; opacity:.3 }
+  .eyebrow { display:flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--c, var(--muted)) }
+  .eyebrow svg { width:22px; height:22px }
+  h1, h2 { font-family:var(--display); font-weight:400; font-style:italic; margin:0; text-wrap:balance; line-height:1.04 }
+  h1 b, h2 b { font-family:var(--display); font-weight:400; font-style:normal; color:var(--c, var(--ink)) }
+  h1 { font-size:clamp(52px, 11vw, 128px) }
+  h2 { font-size:clamp(36px, 6.5vw, 72px) }
+  .asana .img.photo img { will-change:transform; transition:transform .6s cubic-bezier(.2,.6,.2,1) }
+  .pron { display:block; font-family:var(--text); font-style:normal; font-size:clamp(16px, 2vw, 22px); letter-spacing:.04em; color:var(--muted); margin-top:10px }
+  .pron i { font-style:italic }
+  .thin i { font-family:var(--text) }
+  .thin { font-family:var(--body); font-weight:300; font-size:clamp(20px, 3vw, 30px); line-height:1.4; margin:0 }
+  p.copy { max-width:58ch; line-height:1.7; font-size:17px; margin:0 }
+  .ph { color:var(--muted); font-style:italic }
+  .orn { font-family:var(--text); font-style:normal; font-size:.78em; color:var(--ink); padding-inline:.1em }
+  .accent { color:var(--c, var(--ink)) }
+
+  /* sutra reader */
+  .sutra { border-radius:20px; padding:26px clamp(20px, 4vw, 40px) 22px; max-width:640px; display:flex; flex-direction:column; gap:10px; margin-top:14px;
+    background:#fff; border:1px solid rgba(255,255,255,.8); box-shadow:0 8px 26px rgba(33,28,24,.1) }
+  .sutra .s-label { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted) }
+  .sutra .s-num { font-family:var(--text); font-style:italic; color:var(--eye); font-size:15px; letter-spacing:.1em }
+  .sutra .s-sa { font-family:var(--text); font-style:italic; font-size:clamp(20px, 3vw, 28px); margin:0; line-height:1.35; text-wrap:balance }
+  .sutra .s-en { margin:0; font-size:16px; line-height:1.6; color:var(--muted); max-width:46ch }
+  .s-nav { display:flex; gap:14px; align-items:center; margin-top:10px }
+  .s-nav button { font:inherit; font-size:18px; line-height:1; border-radius:999px; width:44px; height:44px; cursor:pointer; color:var(--ink);
+    background:rgba(255,255,255,.6); 
+    border:1px solid rgba(255,255,255,.55); box-shadow:0 8px 26px rgba(33,28,24,.14), inset 0 1px 0 rgba(255,255,255,.7) }
+  .s-nav button:hover, .s-nav button:focus-visible { border-color:var(--eye); color:var(--eye) }
+  .s-nav span { font-size:12px; letter-spacing:.14em; color:var(--muted) }
+  .s-num, .s-sa, .s-en { transition:opacity .3s, transform .3s }
+  .sutra.fading .s-num, .sutra.fading .s-sa, .sutra.fading .s-en { opacity:0; transform:translateY(6px) }
+  .reveal { transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s }
+  .reveal.pre { transform:translateY(26px); opacity:0 }
+  @media (prefers-reduced-motion: reduce) { .reveal, .wash { transition:none } .reveal.pre { transform:none; opacity:1 } }
+
+  /* duotone photo treatment: grayscale image blended onto the section's chakra tint */
+  .duo { position:relative; background:var(--rule); border-radius:18px; overflow:hidden; line-height:0 }
+  .duo img { width:100%; height:100%; object-fit:cover; filter:saturate(.72) contrast(1.02) }
+  .duo::after { content:""; position:absolute; inset:0; background:var(--tint, var(--crown)); opacity:.22; mix-blend-mode:color; pointer-events:none }
+  .duo.arch { border-radius:999px 999px 18px 18px }
+  figure { margin:0 }
+  figcaption { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding-top:10px; line-height:1.5 }
+
+  #crown { min-height:88vh }
+  .hero-sub { display:flex; gap:18px; flex-wrap:wrap; align-items:baseline; color:var(--muted); font-size:14px; letter-spacing:.14em; text-transform:uppercase }
+  .hero-img { margin-top:34px; --tint:var(--crown); aspect-ratio:21/8; width:100vw; margin-inline:calc(50% - 50vw); border-radius:0 }
+  @media (max-width:720px){ .hero-img { aspect-ratio:3/2 } }
+
+  .about-row { display:flex; gap:56px; flex-wrap:wrap; align-items:stretch }
+  .about-row figure { flex:1 1 300px; min-width:0 }
+  .about-row .duo { height:100%; min-height:260px; aspect-ratio:4/3 }
+  @media (max-width:720px){
+    .about-row { flex-direction:column; align-items:center; gap:28px }
+    .about-row figure { flex:none; width:100%; max-width:440px }
+  }
+
+  .asanas { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px }
+  .asana { display:flex; flex-direction:column; gap:12px; min-width:0 }
+  .asana .img { aspect-ratio:3/4; max-width:100%; border-radius:999px 999px 14px 14px; position:relative; overflow:hidden;
+      background:linear-gradient(160deg, color-mix(in srgb, var(--tint) 30%, rgba(255,255,255,.65)) 0%, color-mix(in srgb, var(--tint) 14%, rgba(255,255,255,.4)) 100%);
+      border:1px solid rgba(255,255,255,.55); box-shadow:0 8px 26px rgba(33,28,24,.12), inset 0 1px 0 rgba(255,255,255,.7) }
+  .asana .img::after { content:"photo coming"; position:absolute; inset:auto 0 14px 0; text-align:center; color:var(--ink); opacity:.55; font-size:11px; letter-spacing:.18em; text-transform:uppercase }
+  .asana .img.photo::after { content:""; inset:0; background:var(--tint); opacity:.12; mix-blend-mode:color; pointer-events:none }
+  .asana .img.photo img { width:100%; height:100%; object-fit:cover; filter:saturate(.72) contrast(1.02) }
+  .asana .img.photo { background:var(--rule) }
+  .asana h3 { font-family:var(--display); font-weight:400; font-size:24px; margin:0 }
+  .asana .sanskrit { font-family:var(--text); font-style:italic; color:var(--muted); font-size:16px }
+  .asana p { font-size:14.5px; line-height:1.6; margin:0; color:var(--muted) }
+
+  .therapy-row { display:flex; gap:24px; flex-wrap:wrap; align-items:center }
+  .therapy-row .txt { flex:1 1 320px; min-width:0; display:flex; flex-direction:column; gap:18px }
+  .therapy-row figure { flex:1 1 260px; min-width:0 }
+  .therapy-row .duo { aspect-ratio:1/1; --tint:var(--heart) }
+
+  .certs { display:flex; gap:16px; flex-wrap:wrap }
+  .cert { flex:1 1 240px; min-width:0; border:1px solid var(--rule); border-radius:14px; padding:22px; display:flex; flex-direction:column; gap:8px; background:rgba(251,249,246,.7) }
+  .cert .badge { width:52px; height:52px; border-radius:50%; border:2px solid var(--sacral); display:grid; place-items:center; color:var(--sacral); font-family:var(--display); font-size:20px }
+  .cert h3 { margin:0; font-size:17px; font-weight:600 }
+  .cert a { color:var(--sacral); font-size:14px; text-decoration:underline; text-underline-offset:3px }
+  .cert a:hover, .cert a:focus-visible { color:var(--ink) }
+  .cert .cert-note { color:var(--muted); font-size:14px; font-style:italic }
+  .cert .badge.open { border-style:dashed }
+
+  .email { font-family:var(--text); font-style:italic; font-size:clamp(20px, 3.5vw, 32px); color:var(--ink); user-select:all; margin:0 }
+  .phone { margin:0 }
+  .phone a { font-family:var(--display); font-size:clamp(40px, 8vw, 88px); line-height:1.1; color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap }
+  .phone a:hover, .phone a:focus-visible { color:var(--root) }
+  .contact-links { margin:0 }
+  .contact-links .wa, .contact-links .vb, .book-btn { display:inline-block; font-size:15px; font-weight:500; letter-spacing:.04em; color:var(--ink);
+    background:rgba(255,255,255,.6); 
+    border:1px solid rgba(255,255,255,.55); box-shadow:0 8px 26px rgba(33,28,24,.14), inset 0 1px 0 rgba(255,255,255,.7);
+    border-radius:999px; padding:12px 22px; text-decoration:none }
+  .contact-links .vb { margin-left:8px }
+  .contact-links .wa:hover, .contact-links .vb:hover, .book-btn:hover,
+  .contact-links .wa:focus-visible, .contact-links .vb:focus-visible, .book-btn:focus-visible { background:rgba(184,74,63,.82); color:#fff; border-color:rgba(255,255,255,.35); transition:background .25s, color .25s }
+  .thin b { font-weight:600 }
+  .contact-links a svg { width:17px; height:17px; vertical-align:-3px; margin-right:8px; fill:currentColor }
+  .book { margin-top:18px; display:flex; flex-direction:column; gap:14px; align-items:flex-start }
+
+  .legal { display:flex; flex-direction:column; gap:10px; max-width:70ch }
+  .legal details { border:0; border-radius:12px; padding:14px 0 }
+  .legal summary { cursor:pointer; font-weight:500; font-size:15px }
+  .legal summary:focus-visible { outline:2px solid var(--root); outline-offset:2px }
+  .legal p { font-size:14px; line-height:1.65; color:var(--muted); margin:10px 0 0 }
+  footer { padding-block:28px; color:var(--muted); font-size:13px; display:flex; gap:14px; flex-wrap:wrap }
+  a { color:inherit }
+  :focus-visible { outline:2px solid var(--eye); outline-offset:2px }
+
+  /* liquid-glass language toggle */
+  .lang { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:20; display:flex; padding:4px; border-radius:999px;
+    background:rgba(255,255,255,.6); 
+    border:1px solid rgba(255,255,255,.55); box-shadow:0 8px 26px rgba(33,28,24,.14), inset 0 1px 0 rgba(255,255,255,.7) }
+  .lang button { position:relative; z-index:1; font-family:var(--body); font-size:13px; font-weight:600; letter-spacing:.08em;
+    border:0; background:none; padding:8px 18px; cursor:pointer; color:var(--muted); transition:color .3s }
+  .lang[data-lang="hr"] button[data-l="hr"], .lang[data-lang="en"] button[data-l="en"] { color:var(--ink) }
+  .lang .thumb { position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 4px); border-radius:999px;
+    background:rgba(255,255,255,.8); box-shadow:0 2px 8px rgba(33,28,24,.2), inset 0 1px 0 #fff;
+    transition:left .4s cubic-bezier(.3,1.3,.4,1) }
+  .lang[data-lang="en"] .thumb { left:50% }
+</style>
+</head>
+<body>
+
+<div class="wash" id="wash" aria-hidden="true"></div>
+<div class="lang" id="langT" data-lang="hr" role="group" aria-label="Language / Jezik">
+  <span class="thumb" aria-hidden="true"></span>
+  <button type="button" data-l="hr">HR</button>
+  <button type="button" data-l="en">EN</button>
+</div>
+<main>
+  <div class="thread" id="thread" aria-hidden="true"></div>
+
+  <section id="crown" data-tint="#7a4bbf">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#7a4bbf" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg> <span data-t="eb1">Sahasrara · crown</span></div>
+    <h1 class="reveal">yo·ga<span class="pron" data-t="pron">/ˈjoʊ·ɡə/ <i>noun</i></span></h1>
+    <p class="thin reveal" data-t="def">from Sanskrit <i>“jog”</i>, to join, to unite <span class="orn" aria-hidden="true">❧</span> a practice where the body moves so the mind can settle.</p>
+    <div class="hero-sub reveal" data-t="hsub"><span>Yoga teacher</span><span>·</span><span>Somatic practice</span><span>·</span><span>Pula, CRO / online</span></div>
+    <figure class="reveal">
+      <div class="duo hero-img"><img src="images/hero-river.jpg" alt="Marina sitting cross-legged in meditation on a white boulder in the middle of a turquoise mountain river"></div>
+    </figure>
+  </section>
+
+  <section data-tint="#4a58b8">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#4a58b8" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7 12h10M12 7v10"/></svg> <span data-t="eb2">Ajna · third eye</span></div>
+    <h2 class="reveal" data-t="phh">The pose is not the goal.<br><b>Attention is.</b></h2>
+    <p class="copy reveal" data-t="phc">This site is a place to learn <span class="orn" aria-hidden="true">❧</span> how asanas work, what they ask of the body, and how a practice becomes therapy. The oldest definition of asana is three words: <i>sthira sukham āsanam</i> <span class="orn" aria-hidden="true">❧</span> steady and at ease. Every school agrees there, then argues about the tools: breath, alignment, time. I teach the agreement <span class="orn" aria-hidden="true">❧</span> noticing when steadiness and ease are really present, and what to change when they aren’t.</p>
+    <div class="sutra reveal" id="sutra">
+      <div class="s-label" data-t="slabel">from the Yoga Sūtras of Patañjali</div>
+      <div class="s-num" id="sNum">I.2</div>
+      <p class="s-sa" id="sSa">yogaś citta-vṛtti-nirodhaḥ</p>
+      <p class="s-en" id="sEn">Yoga is the quieting of the turnings of the mind.</p>
+      <div class="s-nav">
+        <button type="button" id="sPrev" aria-label="Previous sutra">←</button>
+        <span id="sCount">2 / 10</span>
+        <button type="button" id="sNext" aria-label="Next sutra">→</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section data-tint="#3f7fb5">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#3f7fb5" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14c1.5-2 6.5-2 8 0"/></svg> <span data-t="eb3">Vishuddha · throat</span></div>
+    <h2 class="reveal" data-t="ash">Asanas, <b>explained</b></h2>
+    <div class="asanas reveal">
+      <div class="asana" style="--tint:#4f9c6b">
+        <div class="img"></div>
+        <h3 data-t="a1h">Child's pose</h3><span class="sanskrit">Bālāsana</span>
+        <p data-t="a1p">Where every practice can return. Lengthens the back body, quiets the breath.</p>
+      </div>
+      <div class="asana" style="--tint:#3f7fb5">
+        <div class="img"></div>
+        <h3 data-t="a2h">Legs up the wall</h3><span class="sanskrit">Viparīta Karaṇī</span>
+        <p data-t="a2p">A gentle inversion for the nervous system <span class="orn" aria-hidden="true">❧</span> the heart of restorative work.</p>
+      </div>
+      <div class="asana" style="--tint:#c9a227">
+        <div class="img"></div>
+        <h3 data-t="a3h">Corpse pose</h3><span class="sanskrit">Śavāsana</span>
+        <p data-t="a3p">The closing pose that seals the practice <span class="orn" aria-hidden="true">❧</span> even when the practice was only five minutes.</p>
+      </div>
+      <div class="asana" style="--tint:#4a58b8">
+        <div class="img photo"><img src="images/mudra.jpg" alt="Seated by a mountain river, one hand resting on the knee with thumb and index finger touching in gyan mudra" loading="lazy"></div>
+        <h3 data-t="a4h">Gyan mudra</h3><span class="sanskrit">Jñāna mudrā</span>
+        <p data-t="a4p">Thumb and index finger meet <span class="orn" aria-hidden="true">❧</span> what the hands and fingers do, the mind feels.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-tint="#4f9c6b">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#4f9c6b" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3 4-3 4-3-4z"/></svg> <span data-t="eb4">Anahata · heart</span></div>
+    <h2 class="reveal" data-t="outh">Practice <b>outside</b></h2>
+    <div class="therapy-row reveal">
+      <div class="txt">
+        <p class="thin" data-t="outt">The best studio has no walls <span class="orn" aria-hidden="true">❧</span> a beach, a forest, a park.</p>
+        <p class="copy" data-t="outc">Classes are held mostly in Pula and its surroundings <span class="orn" aria-hidden="true">❧</span> in the forest or by the sea, and we gladly roam further: hills with a view, or out to the Croatian islands. Outdoors the body works with its own weight on uneven ground, and the sounds of sea, wind and birds intensify presence. When the weather says no, we move online or indoors. Individual adapted sessions too <span class="orn" aria-hidden="true">❧</span> at a location of your choice.</p>
+      </div>
+      <figure><div class="duo"><img src="images/outside.jpg" alt="Marina seated cross-legged on a boulder beside a mountain river, hands resting in gyan mudra" loading="lazy"></div><figcaption data-t="outcap">Soča river, Slovenia</figcaption></figure>
+    </div>
+  </section>
+
+  <section data-tint="#c9a227">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8.5 9.5h7"/></svg> <span data-t="eb5">Manipura · solar plexus</span></div>
+    <h2 class="reveal" data-t="ceh">Certifications</h2>
+    <div class="certs reveal">
+      <div class="cert"><div class="badge">ॐ</div><h3 data-t="c1h">Certified <span class="accent">Ashtanga</span> Yoga Teacher</h3><a href="certs/yoga-teacher.pdf" data-t="c1a">View certificate (PDF)</a></div>
+      <div class="cert"><div class="badge open">✻</div><h3 data-t="c2h">Calm · Traditional Massage</h3><span class="cert-note" data-t="c2a">Professional training in progress.</span></div>
+    </div>
+  </section>
+
+  <section data-tint="#d07838">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#d07838" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 10a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/></svg> <span data-t="eb6">Svadhisthana · sacral</span></div>
+    <h2 class="reveal" data-t="abh">In person <b>or online</b></h2>
+    <p class="thin reveal" data-t="abt">My name is Marina. In 10 years of yoga, meditation and pranayama, my practice ripens only when it is shared.</p>
+    <div class="about-row reveal">
+      <figure><div class="duo" style="--tint:#d07838"><img src="images/about-smile.jpg" alt="Marina smiling mid-class, arms open in a warrior pose"></div><figcaption data-t="cap1">&nbsp;</figcaption></figure>
+      <figure><div class="duo" style="--tint:#d07838"><img src="images/planting.jpg" alt="Marina kneeling on red earth, planting tree saplings"></div><figcaption data-t="cap2">&nbsp;</figcaption></figure>
+    </div>
+    <p class="copy reveal" data-t="abc">Most people don’t come for acrobatics <span class="orn" aria-hidden="true">❧</span> they come with a stiff back, restless sleep, years of sitting and procrastination behind them. What I teach is quiet and adapted: steady, at ease, outside when the sky allows. You don’t need to be flexible, young or spiritual: an hour of the day is enough. All ages are welcome, because the class adjusts <span class="orn" aria-hidden="true">❧</span> the practice fits the person, not the person the practice. Certified <span class="accent">Ashtanga</span> yoga teacher <span class="orn" aria-hidden="true">❧</span> currently deepening my study of classical massage. The rest belongs to the practice.</p>
+  </section>
+
+  <section data-tint="#b84a3f" id="contact">
+    <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#b84a3f" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" transform="rotate(45 12 12)"/></svg> <span data-t="eb7">Muladhara · root</span></div>
+    <h2 class="reveal" data-t="coh">Practice <b>with me</b></h2>
+    <p class="thin reveal" data-t="cot">Find me on <b>Viber</b> or <b>WhatsApp</b> <span class="orn" aria-hidden="true">❧</span> or just call.</p>
+    <p class="phone reveal"><a href="tel:+385953955734">+385 95 395 5734</a></p>
+    <p class="contact-links reveal"><a class="wa" href="https://wa.me/385953955734"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp</a> <a class="vb" href="viber://chat?number=%2B385953955734"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c-2 0-4.1.3-5.8 1.3C4.3 4.7 3 6.9 3 10.2c0 2.6.8 4.7 2.6 6v4.3c0 .55.63.86 1.06.52l3.1-2.44c.73.1 1.46.15 2.24.15 2 0 4.1-.3 5.8-1.3 1.9-1.2 3.2-3.4 3.2-6.7s-1.3-5.5-3.2-6.7C16.1 2.5 14 2.2 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.1 6.9c-.3-.1-.6 0-.8.2l-.7.8c-.3.4-.4 1-.1 1.4a13 13 0 0 0 5.2 5.2c.5.3 1 .2 1.4-.1l.8-.7c.3-.2.3-.6.1-.9l-1.2-1.5c-.2-.3-.6-.4-.9-.2l-1 .5a10 10 0 0 1-2.1-2.1l.5-1c.2-.3.1-.7-.2-.9L9.1 6.9Z" fill="currentColor"/></svg>Viber</a></p>
+    <p class="email reveal"><a href="mailto:ask@marinahuber.com">ask@marinahuber.com</a></p>
+    <div class="book reveal">
+      <p class="copy" data-t="bkc">Remote worker in Istria, or coming to Croatia? Book a session straight into your calendar <span class="orn" aria-hidden="true">❧</span> in person in Pula or online.</p>
+      <a class="book-btn" href="https://cal.com/marinahuber/yoga-session" data-t="bkb">Pick a time <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="legal reveal">
+      <details id="disclaimer">
+        <summary data-t="dsum">Health disclaimer</summary>
+        <p data-t="dp">The content on this site is for general education about yoga and movement. It is not medical advice, diagnosis or treatment, and it does not replace consultation with a doctor or physiotherapist. Check with a qualified health professional before beginning any practice shown here, especially if you are pregnant, recovering from injury or surgery, or living with a medical condition. Practice is at your own risk: work within your own limits and stop if something causes pain.</p>
+      </details>
+      <details id="privacy">
+        <summary data-t="psum">Privacy</summary>
+        <p data-t="pp">This site does not use cookies, analytics or tracking, and it collects no personal data. It is hosted on GitHub Pages; GitHub may log technical data such as your IP address when serving the page (see GitHub's privacy statement). If you contact me by email, I use your address and message only to reply, and share them with no one. If you book a session through a scheduling link, that provider's own privacy policy applies to the data you enter there.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <span data-t="fcopy">© 2026 Marina Huber · Pula, Croatia</span>
+    <a href="#disclaimer" data-t="fd">Disclaimer</a>
+    <a href="#privacy" data-t="fp">Privacy</a>
+  </footer>
+</main>
+
+<script>
+  let LANG = 'en';
+  const Q = new URLSearchParams(location.search);
+  // scroll-linked background wash: lerp between each section's chakra tint (kept subtle)
+  const secs = [...document.querySelectorAll('section[data-tint]')];
+  const wash = document.getElementById('wash');
+  const hex = h => [1,3,5].map(i => parseInt(h.slice(i, i+2), 16));
+  const tints = secs.map(s => hex(s.dataset.tint));
+  secs.forEach(s => s.style.setProperty('--c', s.dataset.tint));
+  const BASE = hex('#fbf9f6'), STRENGTH = 0.13;
+  const mix = (a,b,t) => a.map((v,i) => v + (b[i]-v)*t);
+  function update(){
+    const mid = innerHeight/2;
+    let i = 0, t = 0;
+    for (let k = 0; k < secs.length; k++){
+      const r = secs[k].getBoundingClientRect();
+      if (r.top <= mid) { i = k; t = Math.min(1, Math.max(0, (mid - r.top) / r.height)); }
+    }
+    const next = tints[Math.min(i+1, tints.length-1)];
+    const c = mix(tints[i], next, Math.max(0, t*1.4 - 0.4));
+    const [r,g,b] = mix(BASE, c, STRENGTH).map(Math.round);
+    wash.style.background = `rgb(${r} ${g} ${b})`;
+  }
+  let washTick = false;
+  addEventListener('scroll', () => { if (!washTick){ washTick = true; requestAnimationFrame(() => { update(); washTick = false; }); } }, {passive:true});
+  addEventListener('resize', update); update();
+
+  // weaving text thread: words flow along a winding path as you scroll
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  let threadText = null, threadUnit = 1500;
+  function buildThread(){
+    const host = document.getElementById('thread');
+    // the page-height SVG text path crashes Safari's renderer: only build it on
+    // engines positively identified as Chromium or Firefox (opt-in, never on Safari)
+    const threadOK = !!window.chrome || (window.CSS && CSS.supports && CSS.supports('-moz-appearance','none'));
+    if (Q.has('nothread') || !threadOK){ host.innerHTML=''; threadText = null; return; }
+    const W = host.clientWidth, H = host.clientHeight;
+    host.innerHTML = '';
+    const svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const amp = Math.min(W*0.47, 500), cx = W/2, wave = 860;
+    let d = `M ${cx} -40`;
+    // like a real ribbon: nearly straight at the top, progressively curlier toward the end
+    let y = -40;
+    while (y < H){
+      const t = Math.min(1, Math.max(0, y / H));
+      const a = amp * (0.04 + 0.96 * t * t * t);
+      const w = wave * (1.45 - 1.05 * t * t);
+      d += ` C ${cx+a*1.1} ${y+w*.12}, ${cx+a*1.1} ${y+w*.38}, ${cx} ${y+w*.5}`
+         + ` C ${cx-a*1.1} ${y+w*.62}, ${cx-a*1.1} ${y+w*.88}, ${cx} ${y+w}`;
+      y += w;
+    }
+    const path = document.createElementNS(SVGNS, 'path');
+    path.setAttribute('id', 'threadPath'); path.setAttribute('d', d); path.setAttribute('fill', 'none');
+    const grad = document.createElementNS(SVGNS, 'linearGradient');
+    grad.setAttribute('id', 'chakraGrad'); grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
+    grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+    const cols = ['#7a4bbf','#4a58b8','#3f7fb5','#4f9c6b','#c9a227','#d07838','#b84a3f'];
+    cols.forEach((c,i) => { const s = document.createElementNS(SVGNS,'stop');
+      s.setAttribute('offset', (i/(cols.length-1)).toFixed(3)); s.setAttribute('stop-color', c); grad.appendChild(s); });
+    const defs = document.createElementNS(SVGNS,'defs'); defs.appendChild(grad);
+    const text = document.createElementNS(SVGNS, 'text');
+    text.setAttribute('fill', 'url(#chakraGrad)');
+    const tp = document.createElementNS(SVGNS, 'textPath');
+    tp.setAttribute('href', '#threadPath'); tp.setAttribute('startOffset', '0');
+    const phrase = LANG === 'hr' ? 'sūtra znači nit: kratka rečenica koja se čita cijeli život · ' : 'sūtra means thread: a short line you read for a lifetime · ';
+    svg.appendChild(defs); svg.appendChild(path); text.appendChild(tp); svg.appendChild(text); host.appendChild(svg);
+    const len = path.getTotalLength();
+    tp.textContent = phrase;
+    threadUnit = Math.max(200, tp.getComputedTextLength() || 1500);
+    tp.textContent = phrase.repeat(Math.ceil((len + threadUnit + 300) / threadUnit));
+    threadText = tp;
+  }
+  function flowThread(){
+    if (!threadText) return;
+    threadText.setAttribute('startOffset', -((scrollY * 0.35) % threadUnit) - 120);
+  }
+  buildThread();
+  addEventListener('resize', buildThread);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let thTick = false;
+    addEventListener('scroll', () => { if (!thTick){ thTick = true; requestAnimationFrame(() => { flowThread(); thTick = false; }); } }, {passive:true}); flowThread();
+    // gentle 3d tilt on the hero name
+    const mudraBox = document.querySelector('.asana .img.photo'), mudraPic = mudraBox && mudraBox.querySelector('img');
+    if (mudraBox){
+      mudraBox.addEventListener('mousemove', e => {
+        const r = mudraBox.getBoundingClientRect();
+        mudraPic.style.transformOrigin = `${((e.clientX - r.left)/r.width*100).toFixed(1)}% ${((e.clientY - r.top)/r.height*100).toFixed(1)}%`;
+        mudraPic.style.transform = 'scale(1.15)';
+      });
+      mudraBox.addEventListener('mouseleave', () => { mudraPic.style.transform = 'none'; });
+    }
+  }
+
+  // sutra reader — a small selection from Patañjali's Yoga Sutras, own plain renderings
+  const SUTRAS = [
+    ['I.1',  'atha yogānuśāsanam', 'Now begins the teaching of yoga.', 'Sada počinje poduka yoge.'],
+    ['I.2',  'yogaś citta-vṛtti-nirodhaḥ', 'Yoga is the quieting of the turnings of the mind.', 'Yoga je smirivanje vrtloga uma.'],
+    ['I.3',  'tadā draṣṭuḥ svarūpe ’vasthānam', 'Then the seer rests in its own nature.', 'Tada promatrač počiva u vlastitoj prirodi.'],
+    ['I.13', 'tatra sthitau yatno ’bhyāsaḥ', 'Practice is the steady effort to stay present.', 'Praksa je ustrajan trud da ostanemo prisutni.'],
+    ['I.14', 'sa tu dīrgha-kāla-nairantarya-satkārāsevito dṛḍha-bhūmiḥ', 'Practice takes root when tended a long time, without pause, with care.', 'Praksa pušta korijen kad se njeguje dugo, bez prekida, s pažnjom.'],
+    ['I.33', 'maitrī-karuṇā-muditopekṣāṇāṁ … citta-prasādanam', 'The mind clears through friendliness, compassion, gladness and patience.', 'Um se bistri kroz prijateljstvo, suosjećanje, radost i strpljenje.'],
+    ['II.1', 'tapaḥ-svādhyāyeśvara-praṇidhānāni kriyā-yogaḥ', 'Discipline, self-study, surrender: yoga in action.', 'Disciplina, samoproučavanje, predanost: yoga u djelovanju.'],
+    ['II.46','sthira-sukham āsanam', 'The pose is steady and at ease.', 'Poza je stabilna i s lakoćom.'],
+    ['II.47','prayatna-śaithilyānanta-samāpattibhyām', 'It ripens as effort relaxes and attention rests in the boundless.', 'Sazrijeva kad popusti napor i pažnja počine u beskraju.'],
+    ['II.48','tato dvandvānabhighātaḥ', 'Then the opposites no longer disturb.', 'Tada suprotnosti više ne uznemiruju.'],
+  ];
+  let sIdx = 1;
+  const sutraCard = document.getElementById('sutra');
+  function showSutra(k){
+    sIdx = (k + SUTRAS.length) % SUTRAS.length;
+    sutraCard.classList.add('fading');
+    setTimeout(() => {
+      const [num, sa, en, hr] = SUTRAS[sIdx];
+      document.getElementById('sNum').textContent = num;
+      document.getElementById('sSa').textContent = sa;
+      document.getElementById('sEn').textContent = LANG === 'hr' ? hr : en;
+      document.getElementById('sCount').textContent = (sIdx+1) + ' / ' + SUTRAS.length;
+      sutraCard.classList.remove('fading');
+    }, 310);
+  }
+  document.getElementById('sPrev').addEventListener('click', () => showSutra(sIdx-1));
+  document.getElementById('sNext').addEventListener('click', () => showSutra(sIdx+1));
+
+  // bilingual: HR lands first, EN captured from the markup
+  const O = '<span class="orn" aria-hidden="true">❧</span>';
+  const HR = {
+    pron: '/ˈjoː·ɡa/ <i>imenica</i>',
+    def: `Iz Sanskrita <i>“jog”</i>, spojiti, sjediniti ${O} praksa u kojoj se tijelo kreće da bi se um smirio.`,
+    hsub: '<span>Učiteljica yoge</span><span>·</span><span>Somatska praksa</span><span>·</span><span>Pula, CRO / online</span>',
+    eb1:'Sahasrara · kruna', eb2:'Ajna · treće oko', eb3:'Vishuddha · grlo', eb4:'Anahata · srce', eb5:'Manipura · solarni pleksus', eb6:'Svadhisthana · sakralna', eb7:'Muladhara · korijen',
+    phh: 'Poza ili vježba nije cilj.<br><b>Pažnja je.</b>',
+    phc: `Ova stranica je mjesto za učenje ${O} kako asane djeluju, što traže od tijela i kako praksa postaje terapija. Najstarija definicija asane stane u tri riječi: <i>sthira sukham āsanam</i> ${O} stabilno i s lakoćom. Tu se sve škole slažu, a onda raspravljaju o alatima: dah, poravnanje, vrijeme. Ja podučavam ono zajedničko ${O} primjećivati kada su stabilnost i lakoća zaista tu, i što promijeniti kada nisu.`,
+    slabel: 'iz Yoga Sūtri Patañjalija',
+    ash: 'Asane, osnovno <b>tumačenje</b>',
+    a1h: 'Položaj djeteta', a1p: 'Mjesto kamo se svaka praksa može vratiti. Produljuje leđa i stišava dah.',
+    a2h: 'Noge uz zid', a2p: `Nježna inverzija za živčani sustav ${O} srce restorativne prakse.`,
+    a3h: 'Memento mori', a3p: `Završna poza koja zapečaćuje praksu ${O} i kad je praksa trajala samo pet minuta.`,
+    a4h: 'Gyan mudra', a4p: `Palac i kažiprst se spoje ${O} ono što ruke i prsti rade, um osjeća.`,
+    outh: 'Vježbe u <b>prirodi</b>',
+    outt: `Najbolji studio nema zidove ${O} plaža, šuma, park.`,
+    outc: `Satovi se održavaju najčešće u Puli i okolici ${O} u šumi ili uz more, a rado se selimo i dalje: na brežuljke s pogledom ili na otoke Hrvatske. Vani tijelo radi s vlastitom težinom na neravnom tlu, a zvukovi mora, vjetra i ptica pojačavaju prisutnost. Kad vrijeme ne surađuje, selimo se online i u zatvoreno. Ima i individualnih prilagođenih satova ${O} na odabranoj lokaciji.`,
+    outcap: 'Rijeka Soča, Slovenija',
+    ceh: 'Certifikati',
+    c1h: 'Certificirana učiteljica <span class="accent">Ashtanga</span> yoge', c1a: 'Pogledaj certifikat (PDF)',
+    c2h: 'Calm · tradicionalna masaža', c2a: 'Stručno usavršavanje u tijeku.',
+    abh: 'Uživo <b>ili online</b>',
+    abt: `Moje ime je Marina. U 10 godina yoge, meditacije i pranajame moja praksa sazrijeva tek kad se podijeli.`,
+    abc: `Ljudi mi najčešće ne dolaze zbog akrobacija ${O} dolaze s ukočenim leđima, nemirnim snom, te godinama sjedenja i prokrastinacije iza sebe. Ono što podučavam je tiho i prilagođeno: stabilno, s lakoćom, vani kad vrijeme dopusti. Ne trebate biti fleksibilni, mladi ni duhovni, dovoljan je sat vremena u danu. Dobrodošle su sve dobi, jer se satovi prilagođavaju <span class="orn" aria-hidden="true">❧</span> praksa se oblikuje prema osobi, ne osoba prema praksi. Certificirana učiteljica <span class="accent">Ashtanga</span> yoge <span class="orn" aria-hidden="true">❧</span> klasičnu masažu trenutno učim dublje. Sve ostalo pripada praksi.`,
+    cap1: '&nbsp;', cap2: '&nbsp;',
+    coh: 'Za <b>kontakt</b>',
+    cot: `Nađite me na <b>Viberu</b> ili <b>WhatsAppu</b> ${O} ili jednostavno nazovite.`,
+    bkc: `Radite na daljinu iz Istre ili dolazite u Hrvatsku? Rezervirajte termin izravno u svoj kalendar ${O} uživo u Puli ili online.`,
+    bkb: 'Odaberite termin <span aria-hidden="true">→</span>',
+    dsum: 'Zdravstvena napomena',
+    dp: 'Sadržaj ove stranice služi općoj edukaciji o yogi i kretanju. Nije medicinski savjet, dijagnoza ni liječenje i ne zamjenjuje konzultaciju s liječnikom ili fizioterapeutom. Prije početka prakse posavjetujte se sa stručnjakom, osobito u trudnoći, nakon ozljede ili operacije, ili ako živite s nekim zdravstvenim stanjem. Vježbate na vlastitu odgovornost: ostanite unutar svojih granica i stanite ako nešto boli.',
+    psum: 'Privola privatnosti',
+    pp: 'Ova stranica ne koristi kolačiće, analitiku ni praćenje i ne prikuplja osobne podatke. Hostana je na GitHub Pagesu; GitHub pri posluživanju stranice može bilježiti tehničke podatke poput IP adrese (vidi GitHubovu izjavu o privatnosti). Ako mi se javite e-poštom, Vašu adresu i poruku koristim samo za odgovor i ne dijelim ih ni s kim. Ako termin rezervirate putem poveznice za zakazivanje, na podatke koje tamo unesete primjenjuju se pravila privatnosti tog servisa.',
+    fcopy: '© 2026 Marina Huber · Pula', fd: 'Napomena', fp: 'Privola privatnosti',
+  };
+  const EN = {};
+  document.querySelectorAll('[data-t]').forEach(el => { EN[el.dataset.t] = el.innerHTML; });
+  function setLang(l){
+    LANG = l;
+    const D = l === 'hr' ? HR : EN;
+    document.querySelectorAll('[data-t]').forEach(el => { const v = D[el.dataset.t]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.getElementById('langT').dataset.lang = l;
+    const [num, sa, en, hr] = SUTRAS[sIdx];
+    document.getElementById('sEn').textContent = l === 'hr' ? hr : en;
+    buildThread(); flowThread();
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
+  setLang('hr');
+
+  // reveal on scroll — elements are visible by default; only below-fold ones get .pre
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } }), {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.getBoundingClientRect().top > innerHeight){ el.classList.add('pre'); io.observe(el); }
+    });
+    // safety: nothing may stay hidden if the observer never fires (some browsers/modes)
+    setTimeout(() => document.querySelectorAll('.reveal.pre').forEach(el => el.classList.remove('pre')), 1800);
+  }
+</script>
+</body>
+</html>
