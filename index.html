@@ -197,19 +197,19 @@
     <h2 class="reveal" data-t="ash">Asanas, <b>explained</b></h2>
     <div class="asanas reveal">
       <div class="asana" style="--tint:#4f9c6b">
-        <div class="img"></div>
+        <div class="img photo"><img src="images/balasana.jpg" alt="Woman folded forward in child's pose on a grey mat against a white wall" loading="lazy"></div>
         <h3 data-t="a1h">Child's pose</h3><span class="sanskrit">Bālāsana</span>
-        <p data-t="a1p">Where every practice can return. Lengthens the back body, quiets the breath.</p>
+        <p data-t="a1p">A restorative pose where every practice can return <span class="orn" aria-hidden="true">❧</span> lengthens the back body, quiets the breath.</p>
       </div>
       <div class="asana" style="--tint:#3f7fb5">
-        <div class="img"></div>
+        <div class="img photo"><img src="images/viparita.jpg" alt="Woman lying on her back with legs resting up the wall in a soft sunlit room" loading="lazy"></div>
         <h3 data-t="a2h">Legs up the wall</h3><span class="sanskrit">Viparīta Karaṇī</span>
         <p data-t="a2p">A gentle inversion for the nervous system <span class="orn" aria-hidden="true">❧</span> the heart of restorative work.</p>
       </div>
       <div class="asana" style="--tint:#c9a227">
-        <div class="img"></div>
+        <div class="img photo"><img src="images/savasana.jpg" alt="Woman resting in savasana on a mat in a bright sunlit room" loading="lazy"></div>
         <h3 data-t="a3h">Corpse pose</h3><span class="sanskrit">Śavāsana</span>
-        <p data-t="a3p">The closing pose that seals the practice <span class="orn" aria-hidden="true">❧</span> even when the practice was only five minutes.</p>
+        <p data-t="a3p">The deepest restorative pose <span class="orn" aria-hidden="true">❧</span> it seals the practice, even when the practice was only five minutes.</p>
       </div>
       <div class="asana" style="--tint:#4a58b8">
         <div class="img photo"><img src="images/mudra.jpg" alt="Seated by a mountain river, one hand resting on the knee with thumb and index finger touching in gyan mudra" loading="lazy"></div>
@@ -235,7 +235,7 @@
     <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8.5 9.5h7"/></svg> <span data-t="eb5">Manipura · solar plexus</span></div>
     <h2 class="reveal" data-t="ceh">Certifications</h2>
     <div class="certs reveal">
-      <div class="cert"><div class="badge">ॐ</div><h3 data-t="c1h">Certified <span class="accent">Ashtanga</span> Yoga Teacher</h3><a href="certs/yoga-teacher.pdf" data-t="c1a">View certificate (PDF)</a></div>
+      <div class="cert"><div class="badge">ॐ</div><h3 data-t="c1h">Certified <span class="accent">Ashtanga</span> Yoga Teacher</h3><a href="certs/yoga-teacher.pdf" target="_blank" rel="noopener" data-t="c1a">View certificate (PDF)</a></div>
       <div class="cert"><div class="badge open">✻</div><h3 data-t="c2h">Calm · Traditional Massage</h3><span class="cert-note" data-t="c2a">Professional training in progress.</span></div>
     </div>
   </section>
@@ -366,15 +366,15 @@
     let thTick = false;
     addEventListener('scroll', () => { if (!thTick){ thTick = true; requestAnimationFrame(() => { flowThread(); thTick = false; }); } }, {passive:true}); flowThread();
     // gentle 3d tilt on the hero name
-    const mudraBox = document.querySelector('.asana .img.photo'), mudraPic = mudraBox && mudraBox.querySelector('img');
-    if (mudraBox){
-      mudraBox.addEventListener('mousemove', e => {
-        const r = mudraBox.getBoundingClientRect();
-        mudraPic.style.transformOrigin = `${((e.clientX - r.left)/r.width*100).toFixed(1)}% ${((e.clientY - r.top)/r.height*100).toFixed(1)}%`;
-        mudraPic.style.transform = 'scale(1.15)';
+    document.querySelectorAll('.asana .img.photo').forEach(box => {
+      const pic = box.querySelector('img');
+      box.addEventListener('mousemove', e => {
+        const r = box.getBoundingClientRect();
+        pic.style.transformOrigin = `${((e.clientX - r.left)/r.width*100).toFixed(1)}% ${((e.clientY - r.top)/r.height*100).toFixed(1)}%`;
+        pic.style.transform = 'scale(1.15)';
       });
-      mudraBox.addEventListener('mouseleave', () => { mudraPic.style.transform = 'none'; });
-    }
+      box.addEventListener('mouseleave', () => { pic.style.transform = 'none'; });
+    });
   }
 
   // sutra reader — a small selection from Patañjali's Yoga Sutras, own plain renderings
@@ -418,9 +418,9 @@
     phc: `Ova stranica je mjesto za učenje ${O} kako asane djeluju, što traže od tijela i kako praksa postaje terapija. Najstarija definicija asane stane u tri riječi: <i>sthira sukham āsanam</i> ${O} stabilno i s lakoćom. Tu se sve škole slažu, a onda raspravljaju o alatima: dah, poravnanje, vrijeme. Ja podučavam ono zajedničko ${O} primjećivati kada su stabilnost i lakoća zaista tu, i što promijeniti kada nisu.`,
     slabel: 'iz Yoga Sūtri Patañjalija',
     ash: 'Asane, osnovno <b>tumačenje</b>',
-    a1h: 'Položaj djeteta', a1p: 'Mjesto kamo se svaka praksa može vratiti. Produljuje leđa i stišava dah.',
+    a1h: 'Položaj djeteta', a1p: `Restorativna poza kojoj se svaka praksa može vratiti ${O} produljuje leđa i stišava dah.`,
     a2h: 'Noge uz zid', a2p: `Nježna inverzija za živčani sustav ${O} srce restorativne prakse.`,
-    a3h: 'Memento mori', a3p: `Završna poza koja zapečaćuje praksu ${O} i kad je praksa trajala samo pet minuta.`,
+    a3h: 'Memento mori', a3p: `Najdublja restorativna poza ${O} zapečaćuje praksu, i kad je praksa trajala samo pet minuta.`,
     a4h: 'Gyan mudra', a4p: `Palac i kažiprst se spoje ${O} ono što ruke i prsti rade, um osjeća.`,
     outh: 'Vježbe u <b>prirodi</b>',
     outt: `Najbolji studio nema zidove ${O} plaža, šuma, park.`,
